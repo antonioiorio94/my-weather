@@ -15,7 +15,7 @@ let weather = {
     const { icon, description } = data.weather[0];
     const { temp, humidity } = data.main;
     const { speed } = data.wind;
-    console.log(name, icon, description, temp, humidity, speed);
+
     document.querySelector(".city-name").innerText = "Weather in " + name;
     document.querySelector(".temperature").innerText = temp + "°C";
     document.querySelector(".weather-icon").src =
@@ -24,4 +24,21 @@ let weather = {
     document.querySelector(".humidity").innerText = "Humidity: " + humidity;
     document.querySelector(".wind").innerText = "Wind Speed: " + speed + "km/h";
   },
+  search: function () {
+    this.fetchWeather(document.querySelector(".search-bar").value);
+  },
 };
+
+document.querySelector(".search button").addEventListener("click", function () {
+  weather.search();
+});
+
+document
+  .querySelector(".search-bar")
+  .addEventListener("keyup", function (event) {
+    if (event.key == "Enter") {
+      weather.search();
+    }
+  });
+
+weather.fetchWeather("Cosenza");
